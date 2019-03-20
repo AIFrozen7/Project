@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/pzsh_text"
+        android:background="@mipmap/pzsh"
+        android:gravity="center"
+        android:text="品质生活"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+    <ImageView
+        android:id="@+id/more_img_three"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="12dp"
+        android:src="@mipmap/home_btn_moer_pink_n_hdpi"
+        android:layout_width="24dp"
+        android:layout_height="12dp"
+        android:layout_marginRight="24dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_pzsh"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+</RelativeLayout>

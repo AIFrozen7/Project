@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="search_attr">
+        <attr name="left_img_src" format="reference"/>
+        <attr name="left_img_width" format="dimension"/>
+        <attr name="left_img_height" format="dimension"/>
+
+        <attr name="edit_search_shape" format="reference"/>
+
+        <attr name="edit_search_width" format="dimension"/>
+        <attr name="edit_search_height" format="dimension"/>
+
+        <attr name="edit_search_hint" format="string"/>
+        <attr name="edit_search_text" format="string"/>
+
+        <attr name="right_button_text" format="string"/>
+        <attr name="right_button_shape" format="reference"/>
+
+        <attr name="right_button_width" format="dimension"/>
+        <attr name="right_button_height" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="mine_custom_attr">
+        <attr name="mine_custom_textview_text" format="string"/>
+        <attr name="mine_custom_text_shape" format="reference"/>
+        <attr name="mine_custom_img_src" format="reference"/>
+    </declare-styleable>
+</resources>

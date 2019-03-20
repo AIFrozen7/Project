@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="horizontal"
+    android:padding="10dp">
+    <ImageView
+        android:id="@+id/custom_mine_img"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:id="@+id/custom_mine_text"
+        android:text="个人资料"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:layout_marginLeft="30dp"
+        android:background="@null"
+        android:drawableBottom="@drawable/mine_text_shape"
+        android:textColor="#666666"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
