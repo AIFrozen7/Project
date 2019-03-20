@@ -11,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bwei.weidustore.DetailsActivity;
 import com.bwei.weidustore.R;
 import com.bwei.weidustore.bean.ShopListBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -46,13 +49,13 @@ public class PzshAdapter extends RecyclerView.Adapter<PzshAdapter.ViewHolder>{
         Glide.with(context).load(pzshlist.get(i).getMasterPic()).into(viewHolder.pzsh_img);
         viewHolder.pzsh_title.setText(pzshlist.get(i).getCommodityName());
         viewHolder.pzsh_price.setText(pzshlist.get(i).getPrice()+"");
-//        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EventBus.getDefault().post(pzshlist.get(i).getCommodityId()+"");
-//                context.startActivity(new Intent(context, DetailsActivity.class));
-//            }
-//        });
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().postSticky(pzshlist.get(i).getCommodityId()+"");
+                context.startActivity(new Intent(context, DetailsActivity.class));
+            }
+        });
     }
 
     @Override

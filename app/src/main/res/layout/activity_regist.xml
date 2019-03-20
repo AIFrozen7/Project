@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistActivity"
+    android:orientation="vertical"
+    android:background="@mipmap/backgroud">
+
+
+    <LinearLayout
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <EditText
+            android:background="@null"
+            android:drawableBottom="@drawable/edit_shape"
+            android:drawablePadding="15dp"
+            android:textColorHint="#fff"
+            android:maxLines="1"
+            android:padding="20dp"
+            android:drawableLeft="@mipmap/register_icon_phone_n_hdpi"
+            android:id="@+id/regist_phone"
+            android:hint="@string/phonenum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"/>
+        <EditText
+            android:background="@null"
+            android:drawableBottom="@drawable/edit_shape"
+            android:drawablePadding="15dp"
+            android:textColorHint="#fff"
+            android:maxLines="1"
+            android:padding="20dp"
+            android:drawableLeft="@mipmap/login_icon_verificationcode_n_hdpi"
+            android:hint="验证码"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"/>
+        <EditText
+            android:background="@null"
+            android:drawableBottom="@drawable/edit_shape"
+            android:drawablePadding="15dp"
+            android:textColorHint="#fff"
+            android:maxLines="1"
+            android:padding="20dp"
+            android:drawableLeft="@mipmap/register_icon_lock_n_hdpi"
+            android:drawableRight="@mipmap/login_icon_eye_n_hdhpi"
+            android:id="@+id/regist_pwd"
+            android:hint="@string/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+            <TextView
+                android:id="@+id/text_login"
+                android:padding="20dp"
+                android:textColor="#fff"
+                android:layout_alignParentRight="true"
+                android:text="@string/alreadyhave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <Button
+        android:background="@drawable/shape"
+        android:layout_marginTop="150dp"
+        android:id="@+id/regist"
+        android:text="@string/regist"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

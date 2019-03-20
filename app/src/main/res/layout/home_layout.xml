@@ -12,105 +12,7 @@
         android:gravity="center"
         app:right_button_text="搜索"
         app:left_img_src="@mipmap/common_nav_btn_menu_n_hdpi"></com.bwei.weidustore.custom.CustomSearchView>
-    <!--<ScrollView-->
-        <!--android:id="@+id/scrollview"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_below="@id/custom_serch">-->
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical">-->
-            <!--<com.stx.xhb.xbanner.XBanner-->
-                <!--android:id="@+id/xbanner"-->
-                <!--android:layout_marginBottom="20dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="250dp"-->
-                <!--app:isClipChildrenMode="true"-->
-                <!--android:clickable="true"-->
-                <!--android:layout_marginTop="10dp"></com.stx.xhb.xbanner.XBanner>-->
-            <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="15dp">-->
-                <!--<TextView-->
-                    <!--android:background="@mipmap/rxxp"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="热销新品"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="30dp"/>-->
-                <!--<ImageView-->
-                    <!--android:id="@+id/more_img_one"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginTop="12dp"-->
-                    <!--android:src="@mipmap/common_btn_more_yellow_n_hdpi"-->
-                    <!--android:layout_width="24dp"-->
-                    <!--android:layout_height="12dp"-->
-                    <!--android:layout_marginRight="24dp"/>-->
-                <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:id="@+id/recyclerView_rxxp"-->
-                    <!--android:layout_marginTop="30dp"-->
-                    <!--android:layout_marginLeft="24dp"-->
-                    <!--android:layout_marginRight="24dp"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>-->
-            <!--</RelativeLayout>-->
-            <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="15dp">-->
-                <!--<TextView-->
-                    <!--android:background="@mipmap/mlss"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="魔力时尚"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="30dp"/>-->
-                <!--<ImageView-->
-                    <!--android:id="@+id/more_img_two"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginTop="12dp"-->
-                    <!--android:src="@mipmap/home_btn_more_purple_n_hdpi"-->
-                    <!--android:layout_width="24dp"-->
-                    <!--android:layout_height="12dp"-->
-                    <!--android:layout_marginRight="24dp"/>-->
-                <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:id="@+id/recyclerView_mlss"-->
-                    <!--android:layout_marginTop="30dp"-->
-                    <!--android:layout_marginLeft="24dp"-->
-                    <!--android:layout_marginRight="24dp"-->
-                    <!--android:layout_marginBottom="20dp"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>-->
-            <!--</RelativeLayout>-->
-            <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="15dp">-->
-                <!--<TextView-->
-                    <!--android:background="@mipmap/pzsh"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="品质生活"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="30dp"/>-->
-                <!--<ImageView-->
-                    <!--android:id="@+id/more_img_three"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginTop="12dp"-->
-                    <!--android:src="@mipmap/home_btn_moer_pink_n_hdpi"-->
-                    <!--android:layout_width="24dp"-->
-                    <!--android:layout_height="12dp"-->
-                    <!--android:layout_marginRight="24dp"/>-->
-                <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:id="@+id/recyclerView_pzsh"-->
-                    <!--android:layout_marginTop="30dp"-->
-                    <!--android:layout_marginBottom="20dp"-->
-                    <!--android:layout_marginRight="24dp"-->
-                    <!--android:layout_marginLeft="24dp"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>-->
-            <!--</RelativeLayout>-->
-        <!--</LinearLayout>-->
-    <!--</ScrollView>-->
+
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_below="@id/custom_serch"
@@ -123,49 +25,19 @@
         </android.support.v7.widget.RecyclerView>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/search_linearlayout"
-        android:layout_below="@id/custom_serch"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/search_rcview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-    </LinearLayout>
-
     <!--<LinearLayout-->
-        <!--android:id="@+id/history_linearlayout"-->
+        <!--android:id="@+id/search_linearlayout"-->
+        <!--android:layout_below="@id/custom_serch"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
-        <!--android:layout_below="@id/custom_serch"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:orientation="vertical"-->
-        <!--android:padding="20dp">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="历史记录:"-->
-            <!--android:textColor="#f00"-->
-            <!--android:textSize="20sp" />-->
+        <!--android:orientation="vertical">-->
 
         <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/history_rcview"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>-->
-
-        <!--<Button-->
-            <!--android:id="@+id/delete_history"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="250dp"-->
-            <!--android:background="@drawable/shop_btn"-->
-            <!--android:text="清空历史"-->
-            <!--android:textColor="#fff"-->
-            <!--android:textSize="12sp" />-->
+            <!--android:id="@+id/search_rcview"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>-->
     <!--</LinearLayout>-->
+
+
 
 </RelativeLayout>

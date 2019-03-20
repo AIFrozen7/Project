@@ -11,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bwei.weidustore.DetailsActivity;
 import com.bwei.weidustore.R;
 import com.bwei.weidustore.bean.ShopListBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -47,13 +50,13 @@ public class MlssAdapter extends RecyclerView.Adapter<MlssAdapter.ViewHolder>{
         viewHolder.mlss_title.setText(mlsslist.get(i).getCommodityName());
         viewHolder.mlss_price.setText(mlsslist.get(i).getPrice()+"");
 
-//        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EventBus.getDefault().postSticky(mlsslist.get(i).getCommodityId()+"");
-//                context.startActivity(new Intent(context, DetailsActivity.class));
-//            }
-//        });
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().postSticky(mlsslist.get(i).getCommodityId()+"");
+                context.startActivity(new Intent(context, DetailsActivity.class));
+            }
+        });
     }
 
     @Override

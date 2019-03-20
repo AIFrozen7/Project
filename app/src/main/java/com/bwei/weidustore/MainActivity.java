@@ -1,10 +1,12 @@
 package com.bwei.weidustore;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioGroup;
 
-import com.bwei.weidustore.base.BaseActivity;
 import com.bwei.weidustore.fragment.BillFragment;
 import com.bwei.weidustore.fragment.CircleFragment;
 import com.bwei.weidustore.fragment.HomeFragment;
@@ -15,18 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
-//    @BindView(R.id.rb1)
-//    RadioButton rb1;
-//    @BindView(R.id.rb2)
-//    RadioButton rb2;
-//    @BindView(R.id.rb3)
-//    RadioButton rb3;
-//    @BindView(R.id.rb4)
-//    RadioButton rb4;
-//    @BindView(R.id.rb5)
-//    RadioButton rb5;
     @BindView(R.id.radio_group)
     RadioGroup radioGroup;
     private CircleFragment circleFragment;
@@ -37,30 +29,12 @@ public class MainActivity extends BaseActivity {
     private Unbinder bind;
     private HomeFragment homeFragment;
 
-    //初始化P层
+
     @Override
-    protected Object getPresenter() {
-        return null;
-    }
-    //初始化布局
-    @Override
-    protected int getlayoutResID() {
-        return R.layout.activity_main;
-    }
-    //初始化控件
-    @Override
-    protected void initView() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         bind = ButterKnife.bind(this);
-    }
-
-    //初始化数据
-    @Override
-    protected void initData() {
-
-    }
-    //初始化监听
-    @Override
-    protected void initListener() {
         manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         homeFragment = new HomeFragment();

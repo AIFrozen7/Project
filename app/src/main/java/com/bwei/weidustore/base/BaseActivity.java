@@ -4,19 +4,31 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.bwei.weidustore.presenter.HomePresenter;
+
+import org.greenrobot.eventbus.EventBus;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * @Auther: 李
  * @Date: 2019/3/14 19:02:48
  * @Description:
  */
-public abstract class BaseActivity<T> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
     //在父类声明
-    public T presenter;
+    public BasePresenter presenter;
+    private Unbinder unbinder;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getlayoutResID());
+        unbinder = ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         presenter = getPresenter();
+        presenter.attch(this);
         initView();
         initData();
         initListener();
@@ -33,4 +45,12 @@ public abstract class BaseActivity<T> extends AppCompatActivity {
     protected abstract void initData();
     //初始化监听
     protected abstract void initListener();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
+        presenter.detach();
+        EventBus.getDefault().unregister(this);
+    }
 }

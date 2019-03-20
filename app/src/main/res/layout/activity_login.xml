@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+    android:background="@mipmap/backgroud">
+
+
+    <LinearLayout
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <EditText
+            android:background="@null"
+            android:drawableBottom="@drawable/edit_shape"
+            android:drawableLeft="@mipmap/login_icon_phone_n_hdpi"
+            android:drawablePadding="15dp"
+            android:id="@+id/login_phone"
+            android:hint="@string/phonenum"
+            android:textColorHint="#fff"
+
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"/>
+        <EditText
+            android:background="@null"
+            android:drawableBottom="@drawable/edit_shape"
+            android:drawableRight="@mipmap/login_icon_eye_n_hdhpi"
+            android:drawableLeft="@mipmap/login_icon_lock_n_hdpi"
+            android:drawablePadding="15dp"
+            android:textColorHint="#fff"
+            android:maxLines="1"
+            android:padding="20dp"
+            android:id="@+id/login_pwd"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"/>
+        <RelativeLayout
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/rmb_checkbox"
+                android:padding="20dp"
+                android:text="@string/remeberpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"/>
+            <ImageView
+                android:id="@+id/qq_login"
+                android:layout_centerHorizontal="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/umeng_socialize_qq"/>
+            <TextView
+                android:clickable="true"
+                android:id="@+id/text_regist"
+                android:padding="20dp"
+                android:textColor="#fff"
+                android:layout_alignParentRight="true"
+                android:text="@string/fastregist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+    <Button
+        android:background="@drawable/shape"
+        android:layout_marginTop="150dp"
+        android:id="@+id/btn_login"
+        android:text="@string/login"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

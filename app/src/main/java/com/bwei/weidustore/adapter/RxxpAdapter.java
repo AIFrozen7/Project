@@ -11,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bwei.weidustore.DetailsActivity;
 import com.bwei.weidustore.R;
 import com.bwei.weidustore.bean.ShopListBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -46,13 +49,13 @@ public class RxxpAdapter extends RecyclerView.Adapter<RxxpAdapter.ViewHolder>{
         Glide.with(context).load(rxxplist.get(i).getMasterPic()).into(viewHolder.rxxp_img);
         viewHolder.rxxp_item1.setText(rxxplist.get(i).getCommodityName());
         viewHolder.rxxp_item2.setText(rxxplist.get(i).getPrice()+"");
-//        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EventBus.getDefault().post(rxxplist.get(i).getCommodityId()+"");
-//                context.startActivity(new Intent(context, DetailsActivity.class));
-//            }
-//        });
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().postSticky(rxxplist.get(i).getCommodityId()+"");
+                context.startActivity(new Intent(context, DetailsActivity.class));
+            }
+        });
     }
 
     @Override

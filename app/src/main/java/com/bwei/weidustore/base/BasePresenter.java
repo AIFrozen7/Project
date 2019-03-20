@@ -2,6 +2,9 @@ package com.bwei.weidustore.base;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+import java.util.Map;
+
+import okhttp3.RequestBody;
 
 /**
  * @Auther: 李
@@ -15,6 +18,7 @@ public abstract class BasePresenter<T> {
      */
     private Reference reference;
 
+
     public void attch(T t){
         reference = new WeakReference(t);
     }
@@ -25,7 +29,15 @@ public abstract class BasePresenter<T> {
             reference = null;
         }
     }
-    //关联
+    //首页
+    //商品
     public abstract void getShopList();
-
+    //轮播
+    public abstract void getBannerData();
+    //详情
+    public abstract void getData(int commodityId);
+    public abstract void getCommentData(int commodityId);
+    public abstract void addShopCarData(Map<String,String> map, RequestBody body);
+    //登录
+    public abstract void getLogin(String phone,String pwd);
 }
