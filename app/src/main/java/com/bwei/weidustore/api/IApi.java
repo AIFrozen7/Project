@@ -1,16 +1,27 @@
 package com.bwei.weidustore.api;
 
 
+import com.bwei.weidustore.bean.AddShopCar;
 import com.bwei.weidustore.bean.BannerBean;
 import com.bwei.weidustore.bean.CommetListBean;
 import com.bwei.weidustore.bean.DetailsBean;
 import com.bwei.weidustore.bean.LoginBean;
+import com.bwei.weidustore.bean.PersonBean;
+import com.bwei.weidustore.bean.RegistBean;
+import com.bwei.weidustore.bean.ShopCarBean;
 import com.bwei.weidustore.bean.ShopListBean;
 
+import java.util.Map;
+
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 import rx.Observable;
@@ -33,22 +44,24 @@ public interface IApi {
     //评论
     @GET(Api.COMMENTLIST)
     Observable<CommetListBean> getComment(@Query("commodityId")int commodityId);
+    //登录
     @POST(Api.LOGIN)
     @FormUrlEncoded
     Observable<LoginBean> getLoginData(@Field("phone")String phone,@Field("pwd")String pwd);
-//    @GET
-//    Observable<MoreBean> getMoreData(@Url String url);
+    //注册
+    @POST(Api.REGIST)
+    @FormUrlEncoded
+    Observable<RegistBean> getRegistData(@Field("phone")String phone,@Field("pwd")String pwd);
+    //查询用户信息
+    @GET(Api.SELECTBYID)
+    Observable<PersonBean> getPersonMsg(@HeaderMap Map<String, String> map);
+    //查询购物车
+    @GET(Api.SHOPCARLIST)
+    Observable<ShopCarBean> getShopCar(@HeaderMap Map<String, String> map);
+    //同步购物车
+    @PUT(Api.ADDSHAOPCAR)
+    Observable<AddShopCar> addShopCar(@HeaderMap Map<String, String> map, @Query("data")String data);
 
-//    //查询购物车
-//    @GET
-//    Observable<ShopCarBean> getShopCar(@HeaderMap Map<String, String> map, @Url String url);
-//
-//    //同步购物车
-//    @Multipart
-//    @PUT
-//    Observable<AddShopCar> addShopCar(@HeaderMap Map<String, String> map, @Part RequestBody body, @Url String url);
-//
-//    //查询用户信息
-//    @GET
-//    Observable<PersonBean> getPersonMsg(@HeaderMap Map<String, String> map, @Url String url);
+
+
 }

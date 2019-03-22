@@ -16,9 +16,6 @@ import com.bwei.weidustore.custom.CustomSearchView;
 import com.bwei.weidustore.model.HomeModel;
 import com.bwei.weidustore.presenter.HomePresenter;
 import com.bwei.weidustore.utils.Contract;
-import com.stx.xhb.xbanner.XBanner;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -29,7 +26,7 @@ import butterknife.BindView;
  * @Date: 2019/2/14 12:16:19
  * @Description:
  */
-public class HomeFragment extends BaseFragment<BasePresenter<HomeModel>> implements Contract.IHomeView {
+public class HomeFragment extends BaseFragment<HomePresenter> implements Contract.IHomeView {
 
 
     @BindView(R.id.custom_serch)
@@ -40,8 +37,9 @@ public class HomeFragment extends BaseFragment<BasePresenter<HomeModel>> impleme
     ScrollView scrollview;
     private List<BannerBean.ResultBean> banner;
 
+
     @Override
-    protected BasePresenter<HomeModel> getPresenter() {
+    protected HomePresenter getPresenter() {
         presenter = new HomePresenter(this);
         return presenter;
     }

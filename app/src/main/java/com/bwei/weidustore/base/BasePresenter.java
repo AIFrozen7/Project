@@ -29,15 +29,4 @@ public abstract class BasePresenter<T> {
             reference = null;
         }
     }
-    //首页
-    //商品
-    public abstract void getShopList();
-    //轮播
-    public abstract void getBannerData();
-    //详情
-    public abstract void getData(int commodityId);
-    public abstract void getCommentData(int commodityId);
-    public abstract void addShopCarData(Map<String,String> map, RequestBody body);
-    //登录
-    public abstract void getLogin(String phone,String pwd);
 }

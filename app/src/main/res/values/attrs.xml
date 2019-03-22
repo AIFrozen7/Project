@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <declare-styleable name="edit_shopcar">
+        <attr name="nums" format="string"/>
+    </declare-styleable>
+
     <declare-styleable name="search_attr">
         <attr name="left_img_src" format="reference"/>
         <attr name="left_img_width" format="dimension"/>

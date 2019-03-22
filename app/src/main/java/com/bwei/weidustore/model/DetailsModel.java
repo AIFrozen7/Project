@@ -1,8 +1,10 @@
 package com.bwei.weidustore.model;
 
 import com.bwei.weidustore.api.IApi;
+import com.bwei.weidustore.bean.AddShopCar;
 import com.bwei.weidustore.bean.CommetListBean;
 import com.bwei.weidustore.bean.DetailsBean;
+import com.bwei.weidustore.bean.ShopCarBean;
 import com.bwei.weidustore.utils.Contract;
 import com.bwei.weidustore.utils.RetrofitManager;
 
@@ -69,7 +71,52 @@ public class DetailsModel implements Contract.IDetailsModel {
     }
 
     @Override
-    public void addShopCarData(Map<String, String> map, RequestBody body, IDetailsCallBack3 iDetailsCallBack3) {
+    public void addShopCarData(Map<String, String> map, String data, final IDetailsCallBack3 iDetailsCallBack3) {
         IApi iApi = RetrofitManager.getRetrofitInstance().setCreat(IApi.class);
+        Observable<AddShopCar> addShopCarObservable = iApi.addShopCar(map, data);
+        addShopCarObservable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<AddShopCar>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(AddShopCar addShopCar) {
+                        iDetailsCallBack3.onSuccess(addShopCar);
+                    }
+                });
     }
+
+    @Override
+    public void getShopCarData(Map<String, String> map, final IDetailsCallBack4 iDetailsCallBack4) {
+        IApi iApi = RetrofitManager.getRetrofitInstance().setCreat(IApi.class);
+        Observable<ShopCarBean> shopCar = iApi.getShopCar(map);
+        shopCar.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<ShopCarBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ShopCarBean shopCarBean) {
+                        iDetailsCallBack4.onSuccess(shopCarBean);
+                    }
+                });
+    }
+
+
 }

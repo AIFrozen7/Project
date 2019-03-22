@@ -18,7 +18,7 @@ import butterknife.Unbinder;
  */
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
     //在父类声明
-    public BasePresenter presenter;
+    public T presenter;
     private Unbinder unbinder;
 
     @Override
@@ -26,7 +26,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.onCreate(savedInstanceState);
         setContentView(getlayoutResID());
         unbinder = ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
         presenter = getPresenter();
         presenter.attch(this);
         initView();
@@ -51,6 +50,5 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.onDestroy();
         unbinder.unbind();
         presenter.detach();
-        EventBus.getDefault().unregister(this);
     }
 }
