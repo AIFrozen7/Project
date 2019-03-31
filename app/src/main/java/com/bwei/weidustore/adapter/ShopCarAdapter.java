@@ -65,22 +65,17 @@ public class ShopCarAdapter extends RecyclerView.Adapter<ShopCarAdapter.ViewHold
             public void addClick() {
                 int number = viewHolder.shopcar_item_custom.getNumber();
                 number++;
-//                viewHolder.shopcar_item_custom.setNumber(number);
                 list.get(i).setCount(number);
-
             }
-
             @Override
             public void delClick() {
                 int number2 = viewHolder.shopcar_item_custom.getNumber();
                 number2--;
-//                viewHolder.shopcar_item_custom.setNumber(number2);
                 if (number2<0){
                     Toast.makeText(context, "不能为0", Toast.LENGTH_SHORT).show();
                 }else {
                     list.get(i).setCount(number2);
                 }
-
             }
         });
 

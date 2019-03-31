@@ -15,7 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistActivity"></activity>
+        <activity android:name=".GoodsLvThreeActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".PayBillActivity" />
+        <activity android:name=".CreateBillActivity" />
+        <activity android:name=".AddAddressActivity" />
+        <activity android:name=".MineActivity" />
+        <activity android:name=".RegistActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MoreActivity" />
         <activity android:name=".DetailsActivity" />

@@ -77,71 +77,6 @@ public class CustomSearchView extends RelativeLayout {
     }
 
 
-
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        measureChildren(widthMeasureSpec,heightMeasureSpec);
-
-        int widthModel = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightModel = MeasureSpec.getMode(heightMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        //获取子控件数量
-        int childCount = getChildCount();
-        //子控件数量为 0 时 不占用空间
-        if (childCount == 0){
-            setMeasuredDimension(0,0);
-        }else {
-            //ViewGroup宽高均为包裹内容(wrap_)
-            if (widthModel == MeasureSpec.AT_MOST && heightMeasureSpec == MeasureSpec.AT_MOST){
-                //高度设为子View中最大的数值 宽设为所有子View宽度之和
-                int totalWidth = getTotalWidth();
-                int maxHeight = getMaxHeight();
-                setMeasuredDimension(totalWidth,maxHeight);
-            }else if (heightModel == MeasureSpec.AT_MOST){//如果只有高设为包裹内容(wrap_height)
-                //高度设为子View中最大的数值 宽设为ViewGroup自己的测量宽度
-                setMeasuredDimension(widthSize,getMaxHeight());
-            }else if (widthModel == MeasureSpec.AT_MOST){//如果只有宽设为包裹内容(wrap_width)
-                //高度设为ViewGroup自己的测量高度 宽设为所有子View宽度之和
-                setMeasuredDimension(getTotalWidth(),heightSize);
-            }
-        }
-    }
-
-    /**
-     * 所有子View的width总和
-     * @return
-     */
-    public int getTotalWidth(){
-        //获取子控件数量
-        int childCount = getChildCount();
-        int totalWidth = 0;
-        for (int i=0;i<childCount;i++){
-            View childView = getChildAt(i);
-            totalWidth += childView.getMeasuredWidth();
-        }
-        return totalWidth;
-    }
-    /**
-     * 所有子View中的height最大值
-     * @return
-     */
-    public int getMaxHeight(){
-        //获取子控件数量
-        int childCount = getChildCount();
-        int maxHeight = 0;
-        for (int i=0;i<childCount;i++){
-            View childView = getChildAt(i);
-            if (maxHeight < childView.getMeasuredHeight()){
-                maxHeight = childView.getMeasuredHeight();
-            }
-        }
-        return maxHeight;
-    }
-
     //图片点击吐司及跳转
     setOnImgSearchClickListener setOnImgSearchClickListener;
 
@@ -153,9 +88,6 @@ public class CustomSearchView extends RelativeLayout {
         this.setOnImgSearchClickListener = setOnImgSearchClickListener;
     }
 
-//    public void getEdit_SearchContent(){
-//
-//    }
     //搜索Button点击获取搜索框中数据
     setOnBtnSearchClickListener setOnBtnSearchClickListener;
 
@@ -167,9 +99,5 @@ public class CustomSearchView extends RelativeLayout {
         this.setOnBtnSearchClickListener = setOnBtnSearchClickListener;
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-    }
 
 }

@@ -2,8 +2,6 @@ package com.bwei.weidustore.utils;
 
 import java.util.Map;
 
-import okhttp3.RequestBody;
-
 /**
  * @Auther: 李
  * @Date: 2019/3/20 10:04:06
@@ -17,6 +15,8 @@ public interface Contract {
     interface IHomeModel{
         void getHomeData(IHomeModel.IHomeCallBack iHomeCallBack);
         void getBannerData(IHomeCallBack iHomeCallBack);
+        void getLvOneData(IHomeCallBack iHomeCallBack);
+        void getLvTwoData(String firstCategoryId,IHomeCallBack iHomeCallBack);
         interface IHomeCallBack{
             void onSuccess(Object o);
             void onFailed(Exception e);
@@ -25,10 +25,30 @@ public interface Contract {
     interface IHomePresenter{
         void getShopList();
         void getBannerData();
+        void getLvOneData();
+        void getLvTwoData(String firstCategoryId);
     }
     interface IHomeView{
         void getData(Object o);
         void getBannerData(Object o);
+        void getLvOneData(Object o);
+        void getLvTwoData(Object o);
+    }
+    /**
+     * 三级类目
+     */
+    interface IGoodsLvThreeModel{
+        void getGoodsThreeData(String categoryId,int page,IGoodsThreeCallBack iGoodsThreeCallBack);
+        interface IGoodsThreeCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+    }
+    interface IGoodsLvThreePresenter{
+        void getGoodsThreeData(String categoryId,int page);
+    }
+    interface IGoodsLvThreeView{
+        void getGoodsThreeData(Object o);
     }
     /**
      * 详情
@@ -131,5 +151,124 @@ public interface Contract {
     }
     interface IShopCarView{
         void getShopCarData(Object o);
+    }
+    /**
+     * 查询收货地址以及设置默认收货地址
+     */
+    interface IAddressModel{
+        void getAddressData(Map<String,String> map,ISelectAddressCallBack iSelectAddressCallBack);
+        void setDefaultAddress(Map<String,String> map,int id,ISetAddressCallBack iSetAddressCallBack);
+        interface ISelectAddressCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+        interface ISetAddressCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+    }
+    interface IAddressPresenter{
+        void getAddressData(Map<String,String> map);
+        void setAddressData(Map<String,String> map,int id);
+    }
+    interface IAddressView{
+        void getAddressData(Object o);
+        void getDefaultAddressData(Object o);
+    }
+    /**
+     * 新建收货地址
+     */
+    interface IAddAddressModel{
+        void AddAddressData(Map<String,String> map,String realName,String phone,String address,String zipCode,IAddAddressCallBack iAddAddressCallBack);
+        interface IAddAddressCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+
+    }
+    interface IAddAddressPresenter{
+        void AddAddressData(Map<String,String> map,String realName,String phone,String address,String zipCode);
+    }
+    interface IAddAddressView{
+        void AddAddressData(Object o);
+    }
+    /**
+     * 创建订单(含有查询地址)
+     */
+    interface ICreatteBillModel{
+        void getCreateAddressData(Map<String,String> map,ISelectCreateAddressCallBack iSelectCreateAddressCallBack);
+        void createBill(Map<String,String> map,String orderInfo,double totalPrice,int addressId,ICreateBillCallBack iCreateBillCallBack);
+        interface ISelectCreateAddressCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+        interface ICreateBillCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+    }
+    interface ICreateBillPresenter{
+        void getCreateAddressData(Map<String,String> map);
+        void createBill(Map<String,String> map,String orderInfo,double totalPrice,int addressId);
+    }
+    interface ICreateBillView{
+        void getCreateAddressData(Object o);
+        void createBill(Object o);
+    }
+    /**
+     * 支付订单
+     */
+    interface IPayBillModel{
+        void payBill(Map<String,String> map,String orderId,int payType,IPayBillCallBack iPayBillCallBack);
+        interface IPayBillCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+    }
+    interface IPayBillPresenter{
+        void payBill(Map<String,String> map,String orderId,int payType);
+    }
+    interface IPayBillView{
+        void payBill(Object o);
+    }
+
+    /**
+     * 根据订单状态查询订单
+     */
+    interface ISelectBillModel{
+        void selectBill(Map<String, String> map,int status,ISelectBillCallBack iSelectBillCallBack);
+        void receiptData(Map<String, String> map,String orderId,IReceiptCallBack iReceiptCallBack);
+        interface ISelectBillCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+        interface IReceiptCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+    }
+    interface ISelectBillPresenter{
+        void selectBill(Map<String, String> map,int status);
+        void receiptData(Map<String, String> map,String orderId);
+    }
+    interface ISelectBillView{
+        void selectBill(Object o);
+        void receiptData(Object o);
+    }
+    /**
+     * 搜索
+     */
+    interface ISearchModel{
+        void getSearchData(int page,String keyword,ISearchDataCallBack iSearchDataCallBack);
+        interface ISearchDataCallBack{
+            void onSuccess(Object o);
+            void onFailed(Exception e);
+        }
+    }
+    interface ISearchPresenter{
+        void getSearchData(int page,String keyword);
+    }
+    interface ISearchView{
+        void getSearchData(Object o);
     }
 }

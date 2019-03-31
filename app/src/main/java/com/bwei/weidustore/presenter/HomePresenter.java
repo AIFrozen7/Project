@@ -60,4 +60,34 @@ public class HomePresenter extends BasePresenter<HomeModel> implements Contract.
             }
         });
     }
+    //一级类目
+    @Override
+    public void getLvOneData() {
+        homeModel.getLvOneData(new Contract.IHomeModel.IHomeCallBack() {
+            @Override
+            public void onSuccess(Object o) {
+                iHomeView.getLvOneData(o);
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+
+            }
+        });
+    }
+    //二级类目
+    @Override
+    public void getLvTwoData(String firstCategoryId) {
+        homeModel.getLvTwoData(firstCategoryId, new Contract.IHomeModel.IHomeCallBack() {
+            @Override
+            public void onSuccess(Object o) {
+                iHomeView.getLvTwoData(o);
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+
+            }
+        });
+    }
 }

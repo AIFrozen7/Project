@@ -51,12 +51,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         RequestOptions requestOptions = RequestOptions.bitmapTransform(new RoundedCorners(30));
         Glide.with(context).applyDefaultRequestOptions(requestOptions).load(list.get(i).getImage()).into(viewHolder.comment_content_img);
 
-//        viewHolder.comment_content_img.setImageURI(Uri.parse(list.get(i).getImage()));
         //圆角头像
         RequestOptions requestOptions2 = RequestOptions.circleCropTransform();
         Glide.with(context).load(list.get(i).getHeadPic()).apply(requestOptions2).into(viewHolder.comment_headimg);
 
-//        viewHolder.comment_headimg.setImageURI(Uri.parse(list.get(i).getImage()));
     }
 
     @Override

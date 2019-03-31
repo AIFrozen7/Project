@@ -1,6 +1,7 @@
 package com.bwei.weidustore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.bwei.weidustore.base.BaseActivity;
 import com.bwei.weidustore.bean.AddShopCar;
 import com.bwei.weidustore.bean.AllShopCarBean;
 import com.bwei.weidustore.bean.CommetListBean;
+import com.bwei.weidustore.bean.CreateBillGoodsBean;
 import com.bwei.weidustore.bean.DetailsBean;
 import com.bwei.weidustore.bean.ShopCarBean;
 import com.bwei.weidustore.presenter.DetailsPresenter;
@@ -66,11 +69,14 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements C
     ImageButton detaildsAdd;
     @BindView(R.id.detailds_buy)
     ImageButton detaildsBuy;
+    @BindView(R.id.scrollview_details)
+    ScrollView scrollviewDetails;
     private String commodityIdS;
     private List<String> xbannerlist;
     private SharedPreferences sp;
     private Map<String, String> map;
     private List<AllShopCarBean> shopCarBeans = new ArrayList<>();
+    private DetailsBean.ResultBean result;
 
 
     @Override
@@ -104,12 +110,12 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements C
 
     @Override
     protected void initListener() {
-
     }
 
     //EventBus接收商品ID
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void getMsg(String commodityIdString) {
+        Toast.makeText(this, commodityIdString, Toast.LENGTH_SHORT).show();
         commodityIdS = commodityIdString;
     }
 
@@ -117,7 +123,7 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements C
     @Override
     public void getData(Object o) {
         final DetailsBean detailsBean = (DetailsBean) o;
-        DetailsBean.ResultBean result = detailsBean.getResult();
+        result = detailsBean.getResult();
 
         String picture = detailsBean.getResult().getPicture();
         //轮播
@@ -203,7 +209,6 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements C
                             jsonArray.put(jsonObject);
                         }
                         String s = jsonArray.toString();
-                        Log.i("xxx",s);
                         presenter.addShopCarData(map,s);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -229,23 +234,21 @@ public class DetailsActivity extends BaseActivity<DetailsPresenter> implements C
                     map.put("userId",userId+"");
                     map.put("sessionId",sessionId);
                     presenter.getShopCarData(map);
-//                    try {
-//                        JSONArray jsonArray = new JSONArray();
-//                        JSONObject jsonObject = new JSONObject();
-//                        jsonObject.put("commodityId",commodityIdS);
-//                        jsonObject.put("count",1);
-//
-//                        jsonArray.put(jsonObject);
-//                        String s = jsonArray.toString();
-//                        presenter.addShopCarData(map,s);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
                 }else {
                     Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.detailds_buy:
+                if (result!=null){
+                    Intent intent = new Intent(DetailsActivity.this,CreateBillActivity.class);
+                    intent.putExtra("commodityId",result.getCommodityId());
+                    intent.putExtra("price",result.getPrice());
+                    intent.putExtra("name",result.getCategoryName());
+                    String picture = result.getPicture();
+                    List<String> list = Arrays.asList(picture.split(","));
+                    intent.putExtra("pic",list.get(0));
+                    startActivity(intent);
+                }
                 break;
         }
     }

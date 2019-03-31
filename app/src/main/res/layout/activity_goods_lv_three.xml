@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GoodsLvThreeActivity"
+    android:orientation="vertical">
+    <com.bwei.weidustore.custom.CustomSearchView
+        android:id="@+id/custom_serch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:edit_search_hint="请输入搜索的商品"
+        android:gravity="center"
+        app:right_button_text="搜索"
+        app:left_img_src="@mipmap/common_nav_btn_menu_n_hdpi"></com.bwei.weidustore.custom.CustomSearchView>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lv_three_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

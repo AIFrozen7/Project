@@ -2,14 +2,19 @@ package com.bwei.weidustore.model;
 
 import com.bwei.weidustore.api.IApi;
 import com.bwei.weidustore.bean.BannerBean;
+import com.bwei.weidustore.bean.GoodsLvOneBean;
+import com.bwei.weidustore.bean.GoodsLvTwoBean;
 import com.bwei.weidustore.bean.ShopListBean;
 import com.bwei.weidustore.utils.Contract;
 import com.bwei.weidustore.utils.RetrofitManager;
 
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
  * @Auther: 李
@@ -18,50 +23,115 @@ import rx.schedulers.Schedulers;
  */
 public class HomeModel implements Contract.IHomeModel {
 
+    /**
+     * 商品数据
+     * @param iHomeCallBack
+     */
     @Override
     public void getHomeData(final IHomeCallBack iHomeCallBack) {
         IApi iApi = RetrofitManager.getRetrofitInstance().setCreat(IApi.class);
-        Observable<ShopListBean> shopList = iApi.getShopList();
-        shopList.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<ShopListBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
+        Flowable<ShopListBean> shopList = iApi.getShopList();
+        shopList.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSubscriber<ShopListBean>() {
                     @Override
                     public void onNext(ShopListBean shopListBean) {
                         iHomeCallBack.onSuccess(shopListBean);
                     }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 });
     }
 
+    /**
+     * 轮播图数据
+     * @param iHomeCallBack
+     */
     @Override
     public void getBannerData(final IHomeCallBack iHomeCallBack) {
         IApi iApi = RetrofitManager.getRetrofitInstance().setCreat(IApi.class);
-        Observable<BannerBean> bannerData = iApi.getBannerData();
-        bannerData.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<BannerBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
+        Flowable<BannerBean> bannerData = iApi.getBannerData();
+        bannerData.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSubscriber<BannerBean>() {
                     @Override
                     public void onNext(BannerBean bannerBean) {
                         iHomeCallBack.onSuccess(bannerBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 一级类目
+     * @param iHomeCallBack
+     */
+    @Override
+    public void getLvOneData(final IHomeCallBack iHomeCallBack) {
+        IApi iApi = RetrofitManager.getRetrofitInstance().setCreat(IApi.class);
+        Flowable<GoodsLvOneBean> lvOneData = iApi.getLvOneData();
+        lvOneData.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSubscriber<GoodsLvOneBean>() {
+                    @Override
+                    public void onNext(GoodsLvOneBean goodsLvOneBean) {
+                        iHomeCallBack.onSuccess(goodsLvOneBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 二级类目
+     * @param firstCategoryId
+     * @param iHomeCallBack
+     */
+    @Override
+    public void getLvTwoData(String firstCategoryId, final IHomeCallBack iHomeCallBack) {
+        IApi iApi = RetrofitManager.getRetrofitInstance().setCreat(IApi.class);
+        Flowable<GoodsLvTwoBean> lvTwoData = iApi.getLvTwoData(firstCategoryId);
+        lvTwoData.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSubscriber<GoodsLvTwoBean>() {
+                    @Override
+                    public void onNext(GoodsLvTwoBean goodsLvTwoBean) {
+                        iHomeCallBack.onSuccess(goodsLvTwoBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

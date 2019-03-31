@@ -1,18 +1,19 @@
 package com.bwei.weidustore.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bwei.weidustore.CreateBillActivity;
 import com.bwei.weidustore.R;
 import com.bwei.weidustore.adapter.ShopCarAdapter;
 import com.bwei.weidustore.base.BaseFragment;
@@ -20,12 +21,13 @@ import com.bwei.weidustore.bean.ShopCarBean;
 import com.bwei.weidustore.presenter.ShopCarPresenter;
 import com.bwei.weidustore.utils.Contract;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
@@ -46,9 +48,10 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     @BindView(R.id.shopcar_btn)
     Button shopcarBtn;
     Unbinder unbinder;
+    Unbinder unbinder1;
     private List<ShopCarBean.ResultBean> result;
     private ShopCarAdapter shopCarAdapter;
-    private Map<String,String>map = new HashMap<>();
+    private Map<String, String> map;
     private int priceAll = 0;
     private int countAll = 0;
 
@@ -65,7 +68,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
 
     @Override
     protected void initView() {
-        shopcarAllXrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), OrientationHelper.VERTICAL,false));
+        shopcarAllXrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), OrientationHelper.VERTICAL, false));
     }
 
     @Override
@@ -75,9 +78,12 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         int userId = sp.getInt("userId", 0);
         String sessionId = sp.getString("sessionId", "");
         //账户信息存入map进行传值
-        map.put("userId",userId+"");
-        map.put("sessionId",sessionId);
-        presenter.getShopCarDataById(map);
+        if (!TextUtils.isEmpty(userId+"")&&!TextUtils.isEmpty(sessionId)){
+            map = new HashMap<>();
+            map.put("userId",userId+"");
+            map.put("sessionId",sessionId);
+            presenter.getShopCarDataById(map);
+        }
     }
 
     @Override
@@ -86,7 +92,7 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         shopcarCheckboxAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (shopCarAdapter!=null){
+                if (shopCarAdapter != null) {
                     shopCarAdapter.getCheckBoxAllState(shopcarCheckboxAll.isChecked());
                 }
             }
@@ -109,24 +115,37 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
         shopcarAllXrecyclerview.setAdapter(shopCarAdapter);
         shopCarAdapter.setSetAllPriceListenter(new ShopCarAdapter.setAllPriceListenter() {
             @Override
-            public void setAllPrice(List<ShopCarBean.ResultBean> list) {
+            public void setAllPrice(final List<ShopCarBean.ResultBean> list) {
                 int totalPrice = 0;
                 int totalNum = 0;
-                for (int i=0;i<list.size();i++){
-                    if (list.get(i).getCheck()){
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getCheck()) {
                         int price = list.get(i).getPrice();
                         int count = list.get(i).getCount();
                         priceAll = price * count;
                         countAll = count;
-                    }else {
+                    } else {
                         priceAll = 0;
                         countAll = 0;
                     }
                     totalPrice += priceAll;
                     totalNum += countAll;
                 }
-                shopcarAllprice.setText(totalPrice+"");
-                shopcarBtn.setText("结算("+totalNum+")");
+                shopcarAllprice.setText(totalPrice + "");
+                shopcarBtn.setText("结算(" + totalNum + ")");
+                //点击结算 判断后进行跳转
+                shopcarBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!shopcarAllprice.getText().toString().equals("0")){
+                            EventBus.getDefault().postSticky(list);
+                            Intent intent = new Intent(getActivity(), CreateBillActivity.class);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(getActivity(), "选中商品后结算", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }
@@ -134,7 +153,15 @@ public class ShopCarFragment extends BaseFragment<ShopCarPresenter> implements C
     @Override
     public void onResume() {
         super.onResume();
-        if (map!=null){
+        //获取登录账户信息
+        SharedPreferences sp = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        int userId = sp.getInt("userId", 0);
+        String sessionId = sp.getString("sessionId", "");
+        //账户信息存入map进行传值
+        if (!TextUtils.isEmpty(userId+"")&&!TextUtils.isEmpty(sessionId)){
+            map = new HashMap<>();
+            map.put("userId",userId+"");
+            map.put("sessionId",sessionId);
             presenter.getShopCarDataById(map);
         }
     }

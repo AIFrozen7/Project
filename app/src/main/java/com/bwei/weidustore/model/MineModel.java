@@ -6,12 +6,15 @@ import com.bwei.weidustore.bean.PersonBean;
 import com.bwei.weidustore.utils.Contract;
 import com.bwei.weidustore.utils.RetrofitManager;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.Map;
 
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
  * @Auther: 李
@@ -22,23 +25,23 @@ public class MineModel implements Contract.IMineModel {
     @Override
     public void getMineData(Map<String, String> map, final IMineCallBack iMineCallBack) {
         IApi iApi = RetrofitManager.getRetrofitInstance().setCreat(IApi.class);
-        Observable<PersonBean> personMsg = iApi.getPersonMsg(map);
-        personMsg.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<PersonBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
+        Flowable<PersonBean> personMsg = iApi.getPersonMsg(map);
+        personMsg.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSubscriber<PersonBean>() {
                     @Override
                     public void onNext(PersonBean personBean) {
                         iMineCallBack.onSuccess(personBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

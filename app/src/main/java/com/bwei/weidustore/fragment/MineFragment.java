@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bwei.weidustore.LoginActivity;
+import com.bwei.weidustore.MineActivity;
 import com.bwei.weidustore.R;
 import com.bwei.weidustore.base.BaseFragment;
 import com.bwei.weidustore.base.BasePresenter;
@@ -97,6 +98,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements Contrac
 
     @OnClick({R.id.nickname_text, R.id.personal_data, R.id.my_circle, R.id.my_foot, R.id.my_wallet, R.id.my_address, R.id.mine_head_img})
     public void onViewClicked(View view) {
+        Intent intent = new Intent(getActivity(), MineActivity.class);
         switch (view.getId()) {
             case R.id.nickname_text:
                 String s = nicknameText.getText().toString();
@@ -105,14 +107,24 @@ public class MineFragment extends BaseFragment<MinePresenter> implements Contrac
                 }
                 break;
             case R.id.personal_data:
+                intent.putExtra("fragname", "personal");
+                startActivity(intent);
                 break;
             case R.id.my_circle:
+                intent.putExtra("fragname", "circle");
+                startActivity(intent);
                 break;
             case R.id.my_foot:
+                intent.putExtra("fragname", "foot");
+                startActivity(intent);
                 break;
             case R.id.my_wallet:
+                intent.putExtra("fragname", "wallet");
+                startActivity(intent);
                 break;
             case R.id.my_address:
+                intent.putExtra("fragname", "address");
+                startActivity(intent);
                 break;
             case R.id.mine_head_img:
                 break;

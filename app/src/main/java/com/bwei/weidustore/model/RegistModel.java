@@ -5,10 +5,13 @@ import com.bwei.weidustore.bean.RegistBean;
 import com.bwei.weidustore.utils.Contract;
 import com.bwei.weidustore.utils.RetrofitManager;
 
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
  * @Auther: 李
@@ -19,23 +22,23 @@ public class RegistModel implements Contract.IRegistModel {
     @Override
     public void getRegistData(String phone, String pwd, final IRegistCallBack iRegistCallBack) {
         IApi iApi = RetrofitManager.getRetrofitInstance().setCreat(IApi.class);
-        Observable<RegistBean> registData = iApi.getRegistData(phone, pwd);
-        registData.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<RegistBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
+        Flowable<RegistBean> registData = iApi.getRegistData(phone, pwd);
+        registData.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSubscriber<RegistBean>() {
                     @Override
                     public void onNext(RegistBean registBean) {
                         iRegistCallBack.onSuccess(registBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

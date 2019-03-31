@@ -5,10 +5,14 @@ import com.bwei.weidustore.bean.LoginBean;
 import com.bwei.weidustore.utils.Contract;
 import com.bwei.weidustore.utils.RetrofitManager;
 
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
+
 
 /**
  * @Auther: 李
@@ -19,23 +23,23 @@ public class LoginModel implements Contract.ILoginModel {
     @Override
     public void getLoginData(String phone, String pwd, final ILoginCallBack iLoginCallBack) {
         IApi iApi = RetrofitManager.getRetrofitInstance().setCreat(IApi.class);
-        Observable<LoginBean> loginData = iApi.getLoginData(phone, pwd);
-        loginData.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<LoginBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
+        Flowable<LoginBean> loginData = iApi.getLoginData(phone, pwd);
+        loginData.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSubscriber<LoginBean>() {
                     @Override
                     public void onNext(LoginBean loginBean) {
                         iLoginCallBack.onSuccess(loginBean);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
